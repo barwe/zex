@@ -1,0 +1,152 @@
+# print
+hasattr
+getattr
+setattr
+isinstance
+sorted
+len
+next
+abs
+pow
+min
+max
+round
+sum
+all
+any
+delattr
+divmod  # 同时执行除法和取模运算
+globals
+hash  # 生成给定对象的哈希值，将对象映射为唯一的整数值
+hex  # 将整数转换为十六进制字符串表示形式
+locals
+vars  # 返回对象的属性和属性值的字典形式
+repr  # 返回一个对象的字符串表示形式，通常是用于表示对象的可打印、可解释的形式
+bool
+float
+bytes
+list
+dict
+range
+enumerate
+set
+int
+str
+tuple
+zip
+AttributeError
+Exception
+FloatingPointError
+IndexError
+KeyError
+SyntaxError
+TypeError
+ValueError
+complex  # 创建复数对象
+filter  # 根据指定条件过滤可迭代对象并返回新的迭代器对象
+map
+reversed  # 将一个序列逆序排列，并返回一个逆序的迭代器对象
+slice
+type
+# ArithmeticError  # 所有数值计算相关异常类的基类
+# AssertionError  # 在断言语句失败时引发
+# BaseException
+# BlockingIOError
+# BrokenPipeError
+# BufferError
+# BytesWarning
+# ChildProcessError
+# ConnectionAbortedError
+# ConnectionError
+# ConnectionRefusedError
+# ConnectionResetError
+# DeprecationWarning
+# EOFError
+# Ellipsis
+# EnvironmentError
+# False
+# FileExistsError
+# FileNotFoundError
+# FutureWarning
+# GeneratorExit
+# IOError
+# ImportError
+# ImportWarning
+# IndentationError
+# InterruptedError
+# IsADirectoryError
+# KeyboardInterrupt
+# LookupError
+# MemoryError
+# ModuleNotFoundError
+# NameError
+# None
+# NotADirectoryError
+# NotImplemented
+# NotImplementedError
+# OSError
+# OverflowError
+# PendingDeprecationWarning
+# PermissionError
+# ProcessLookupError
+# RecursionError
+# ReferenceError
+# ResourceWarning
+# RuntimeError
+# RuntimeWarning
+# StopAsyncIteration
+# StopIteration
+# SyntaxWarning
+# SystemError
+# SystemExit
+# TabError
+# TimeoutError
+# True
+# UnboundLocalError
+# UnicodeDecodeError
+# UnicodeEncodeError
+# UnicodeError
+# UnicodeTranslateError
+# UnicodeWarning
+# UserWarning
+# Warning
+# ZeroDivisionError
+# __build_class__
+# __debug__
+# __doc__
+# __import__
+# __loader__
+# __name__
+# __package__
+# __spec__
+# ascii
+# bin
+# breakpoint
+# bytearray
+# callable
+# chr
+# classmethod
+# compile
+# copyright
+# credits
+# dir
+# eval
+# exec
+# exit
+# format
+# frozenset # 不可变的集合类型
+# help
+# id
+# input
+# issubclass  # 检查一个类是否是另一个类的子类或子类的子类
+# iter
+# license
+# memoryview
+# object
+# oct
+# open
+# ord
+# property
+# quit
+# staticmethod
+# super
