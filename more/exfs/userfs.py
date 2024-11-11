@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Optional, Mapping, Sequence, Any
-from zex import fs
+from zex import fs, xio
 from .tree import TreeNode
 
 
@@ -29,32 +29,38 @@ class RD:
 def list_with_depth(paths: Sequence[str], depth: int, ignores: Sequence[str] = None, **_):
 
     if ignores and len(ignores) > 0:
-        ignore = lambda rp: fs.path_matches_patterns(rp, ignores)
+        ignore = lambda p: fs.path_matches_patterns(p, ignores)
     else:
         ignore = lambda _: False
 
-    def recurse(_paths: Sequence[str], _depth: int):
-        if _depth <= 0:
-            return [TreeNode.get(i, depth=0) for i in _paths]
-        root_nodes = []
-        for path0 in _paths:
-            node0 = TreeNode.get(path0, depth=_depth)
-            root_nodes.append(node0)
-            if not fs.isdir(path0):
-                continue
-            next_paths = []
-            for name in fs.listdir(path0):
-                path = fs.join(path0, name)
-                if ignore(fs.relpath(path, path0)):
-                    continue
-                node = TreeNode.get(path, depth=_depth - 1)
-                node0.add_child(node)
-                if fs.isdir(path):
-                    next_paths.append(path)
-            recurse(next_paths, _depth - 1)
-        return root_nodes
+    def list_one(root_dir: str):
 
-    return recurse(paths, depth)
+        def recurse(ps: Sequence[str], dep: int):
+            if dep <= 0:
+                return [TreeNode.get(i, depth=0) for i in ps]
+
+            nodes = []
+            for path0 in ps:
+                node0 = TreeNode.get(path0, depth=dep)
+                nodes.append(node0)
+                if not fs.isdir(path0):
+                    continue
+                next_ps = []
+                for name in fs.listdir(path0):
+                    path1 = fs.join(path0, name)
+                    if ignore(path1):
+                        continue
+                    node = TreeNode.get(path1, depth=dep - 1)
+                    node0.add_child(node)
+                    if fs.isdir(path1):
+                        next_ps.append(path1)
+                recurse(next_ps, dep - 1)
+
+            return nodes
+
+        return recurse([root_dir], depth)[0]
+
+    return [list_one(r) for r in paths]
 
 
 class LocalUserFileManager:
