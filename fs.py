@@ -43,14 +43,10 @@ def format_size(nbytes: int, sep=" "):
     return v(s, size_name[i])
 
 
-def mkdir(*paths, is_file=False) -> str:
+def mkdir(*paths) -> str:
     path = join(*paths)
-    if is_file:
-        _path = dirname(path)
-    else:
-        _path = path
-    if not exists(_path):
-        os.makedirs(_path)
+    if not exists(path):
+        os.makedirs(path)
     return path
 
 
