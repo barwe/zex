@@ -4,7 +4,6 @@ import shutil
 from os.path import *
 from os.path import __all__ as __os_path__
 from typing import Sequence
-from .decorators._cache import cache
 
 __all__ = [
     *__os_path__,
@@ -26,9 +25,6 @@ __all__ = [
     "rmfiles",
     "list_files",
     "get_os_app_data_dir",
-    "open_dir_explorer",
-    "path_matches_pattern",
-    "path_matches_patterns",
 ]
 
 
@@ -162,25 +158,3 @@ def get_os_app_data_dir(*subs: Sequence[str]):
 
 def open_dir_explorer(path: str):
     os.system(f"start explorer {path}")
-
-
-@cache()
-def _glob_to_regex(pattern: str):
-    """
-    将路径模式转换为正则表达式。\n
-    目前支持的路径模式通配符: `*`, `**`
-    """
-    pattern = re.escape(pattern)
-    pattern = pattern.replace(r"\*\*/", r"(.*/)?")
-    pattern = pattern.replace(r"\*", r"[^/]*")
-    regex = re.compile(pattern)
-    return regex
-
-
-def path_matches_pattern(path: str, pattern: str):
-    regex = _glob_to_regex(pattern)
-    return bool(regex.fullmatch(path))
-
-
-def path_matches_patterns(path: str, patterns: Sequence[str]):
-    return any((path_matches_pattern(path, pattern) for pattern in patterns))

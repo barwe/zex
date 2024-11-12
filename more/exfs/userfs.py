@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional, Mapping, Sequence, Any
-from zex import fs, xio
+from zex import fs
+from zex.xglob import path_matches_any_patterns
 from .tree import TreeNode
 
 
@@ -29,7 +30,7 @@ class RD:
 def list_with_depth(paths: Sequence[str], depth: int, ignores: Sequence[str] = None, **_):
 
     if ignores and len(ignores) > 0:
-        ignore = lambda p: fs.path_matches_patterns(p, ignores)
+        ignore = lambda p: path_matches_any_patterns(p, ignores)
     else:
         ignore = lambda _: False
 
