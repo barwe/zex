@@ -49,14 +49,14 @@ class Node:
             yield children
             children = list_children(children)
 
-    def descendants(self):
+    def descendants(self) -> Sequence["Node"]:
         items = []
         for layer_nodes in self.bfs():
             items = [*items, *layer_nodes]
         return items
 
     @staticmethod
-    def get_uniq_root(nodes):
+    def get_uniq_root(nodes: Sequence["Node"]):
         root = Node("__ROOT__")
         for node in nodes:
             if len(node.parents) == 0:
