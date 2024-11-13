@@ -1,9 +1,9 @@
 from typing import Dict, Any
 from typing import TypeVar, Mapping, Union
 
-T = TypeVar("T")
+T = TypeVar("T", bound=Any)
 N = Union[None, T]
-Record = Dict[str, Any]
-RoRecord = Mapping[str, Any]
+Record = Dict[str, T]
+RoRecord = Mapping[str, T]
 
-__all__ = ["T", "N", "record", "RoRecord"]
+__all__ = ["T", "N", "Record", "RoRecord"]

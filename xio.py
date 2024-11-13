@@ -1,3 +1,5 @@
+import os
+import sys
 import json
 from os.path import exists
 from .types import Union, T
@@ -31,12 +33,25 @@ def write_json(data: T, filepath: str, **options):
         json.dump(data, fw, **options)
 
 
-def get_logger():
+def get_default_logger():
+    level = os.environ.get("TGRPC_LOG_LEVEL", "DEBUG")
+
     try:
         from loguru import logger
+
+        logger.remove()
+        logger.add(sys.stdout, level=level)
+
     except ImportError:
         import logging as logger
+
+        logger.basicConfig(
+            level=logger._nameToLevel[level],
+            format="%(asctime)s [%(levelname)s] %(message)s",
+            datefmt="%Y-%m-%d %H:%M:%S",
+        )
+
     return logger
 
 
-logger = get_logger()
+logger = get_default_logger()
