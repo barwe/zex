@@ -3,7 +3,6 @@ import re
 import shutil
 from os.path import *
 from os.path import __all__ as __os_path__
-from functools import cache
 from typing import Sequence
 
 __all__ = [
@@ -25,7 +24,6 @@ __all__ = [
     "rename",
     "rmfiles",
     "list_files",
-    "get_os_app_data_dir",
 ]
 
 
@@ -144,26 +142,3 @@ def list_files(target_dir: str, pattern: str, exclude_dirs: Sequence[str] = None
                 items.append(item)
                 index += 1
     return items
-
-
-@cache
-def get_os_app_data_dir(*subs: Sequence[str]):
-    import platform
-
-    system = platform.system()
-    if system == "Windows":
-        path_to_appdata = os.getenv("APPDATA")
-        target = path_to_appdata if path_to_appdata else None
-    else:
-        result = join(expanduser("~"), ".config")
-        if exists(result):
-            target = result
-        else:
-            target = join(expanduser("~"), ".local", "share")
-    if len(subs) > 0:
-        target = join(target, *subs)
-    return target
-
-
-def open_dir_explorer(path: str):
-    os.system(f"start explorer {path}")
