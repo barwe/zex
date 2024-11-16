@@ -3,6 +3,7 @@ import re
 import shutil
 from os.path import *
 from os.path import __all__ as __os_path__
+from functools import cache
 from typing import Sequence
 
 __all__ = [
@@ -83,6 +84,17 @@ copy_dir = shutil.copytree
 copy_file = shutil.copy
 
 
+def clear_dir(dp: str):
+    for i in os.listdir(dp):
+        fp = join(dp, i)
+        if isfile(fp):
+            rmfile(fp)
+        elif isdir(fp):
+            rmdir(fp)
+        else:
+            raise Exception()
+
+
 def split_basename(filepath: str):
     "从文件路径的 basename 中拆分出 (filename, extname)"
     _base = basename(filepath)
@@ -134,6 +146,7 @@ def list_files(target_dir: str, pattern: str, exclude_dirs: Sequence[str] = None
     return items
 
 
+@cache
 def get_os_app_data_dir(*subs: Sequence[str]):
     import platform
 
