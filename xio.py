@@ -55,3 +55,19 @@ def get_default_logger():
 
 
 logger = get_default_logger()
+
+
+def calculate_md5(file_path: str):
+    import hashlib
+
+    # 创建一个 MD5 哈希对象
+    md5_hash = hashlib.md5()
+
+    # 以二进制模式打开文件
+    with open(file_path, "rb") as f:
+        # 逐块读取文件内容并更新哈希对象
+        for chunk in iter(lambda: f.read(4096), b""):
+            md5_hash.update(chunk)
+
+    # 返回 MD5 哈希值的十六进制表示
+    return md5_hash.hexdigest()
