@@ -4,9 +4,7 @@ import asyncio
 import aiofiles
 from typing import ClassVar, Dict, IO
 from os.path import exists, abspath, dirname, basename
-from zex import fs, xio
-from zex.xio import logger
-from zex.types import RoRecord, N
+from zex import fs, xio, logger, RoRecord, N
 from .chunk import FileMeta
 from .kdefs import *
 

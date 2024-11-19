@@ -1,7 +1,7 @@
 import os
 import inspect
 import functools
-from zex.xio import logger
+from zex.log import logger
 
 
 def get_frame(stacklevel: int):
