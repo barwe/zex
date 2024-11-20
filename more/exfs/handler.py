@@ -2,7 +2,7 @@ import time
 import threading
 from typing import IO, ClassVar, Dict, Optional
 from zex import fs
-from zex.xio import logger
+from zex.log import logger
 from zex.types import RoRecord
 from zex.decorators import cache
 
